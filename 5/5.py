@@ -2,9 +2,12 @@
 5. Створіть за допомогою класів та продемонструйте свою реалізацію шкільної бібліотеки(включіть фантазію).
 """
 from librare_book import Librare
+from db_book import Database
 
 
 def menu():
+    lib_book = Librare()
+    close_db = Database()
     while True:
         try:
             print("<-------------------------------------------->")
@@ -15,7 +18,6 @@ def menu():
                            "3. exit\n"
                            "make a choice -> ")
             print("<-------------------------------------------->")
-            lib_book = Librare()
             if in_put == "1":
                 print("<-------------------------------------------->")
                 print("<< you can find your book by <<author>> by <<book title>> and <<year of publication>> >>")
@@ -35,7 +37,7 @@ def menu():
                     in_giv_author = input("author -> ")
                     in_giv_book_title = input("book title -> ")
                     in_giv_number_of_copies = input("number_of_copies -> ")
-                    if in_giv_author.isalpha() and in_giv_book_title.isalpha() and (in_giv_number_of_copies == int):
+                    if in_giv_author.isalpha() and in_giv_book_title.isalpha() and (in_giv_number_of_copies.isdecimal()):
                         lib_book.give_book_from_library(author=in_giv_author,
                                                         name_book=in_giv_book_title,
                                                         number_of_copies=int(in_giv_number_of_copies))
@@ -59,10 +61,11 @@ def menu():
                 else:
                     print("<< entering an invalid value >>")
             elif in_put == "3":
-                exit()
+                break
 
         except Exception as err:
             print(f"<< error -> {err} >>")
+    close_db.close_database()
 
 
 if __name__ in "__main__":
